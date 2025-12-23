@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "동헤르만 육지거북 식단 가이드",
   "scripts": {
+    "build": "echo 'No build required'",
     "deploy": "echo 'Deploying static site...'"
   },
   "keywords": [
