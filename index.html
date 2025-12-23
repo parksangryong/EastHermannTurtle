@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파라도 매니저 | 동헤르만 육지거북 식단 가이드</title>
+    <meta
+      name="description"
+      content="동헤르만 육지거북의 건강한 성장을 위한 정밀 식단 분석 가이드."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #2d5a27;
+        --primary-light: #4c8a42;
+        --accent: #f9d423;
+        --bg-dark: #0f170d;
+        --bg-light: #f4f7f2;
+        --surface: rgba(255, 255, 255, 0.9);
+        --text-main: #2d3436;
+        --text-muted: #636e72;
+        --grade-green: #2ecc71;
+        --grade-orange: #f39c12;
+        --grade-red: #e74c3c;
+        --grade-black: #2d3436;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --radius: 24px;
+        --font-heading: "Outfit", sans-serif;
+        --font-body: "Inter", "Noto Sans KR", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-main);
+        font-family: var(--font-body);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* Hero */
+      .hero-section {
+        position: relative;
+        height: 50vh;
+        min-height: 450px;
+        background: linear-gradient(135deg, #1a3a16 0%, #2d5a27 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+      }
+
+      /* Fallback background if image is not found or user wants simplicity */
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("parado_manager_hero.png");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.4;
+        filter: saturate(1.2);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 1rem;
+      }
+
+      .badge {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      h1 {
+        font-family: var(--font-heading);
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        letter-spacing: -1.5px;
+        line-height: 1.1;
+      }
+
+      .highlight {
+        color: var(--accent);
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        font-weight: 300;
+      }
+
+      /* Grade Legend */
+      .grade-legend {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: -3rem auto 4rem;
+        position: relative;
+        z-index: 10;
+      }
+
+      .legend-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .legend-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .legend-icon {
+        font-size: 2rem;
+      }
+
+      .legend-text h4 {
+        font-family: var(--font-heading);
+        font-size: 1rem;
+      }
+
+      .legend-text p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.3;
+      }
+
+      /* Search */
+      .search-area {
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      #searchInput {
+        width: 100%;
+        max-width: 600px;
+        padding: 1.2rem 2rem;
+        border-radius: 50px;
+        border: 2px solid transparent;
+        background: white;
+        box-shadow: var(--shadow);
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        outline: none;
+        margin-bottom: 1.5rem;
+      }
+
+      #searchInput:focus {
+        border-color: var(--primary-light);
+      }
+
+      /* Recommendation Buttons */
+      .recommend-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .recommend-btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        border: 2px solid var(--primary);
+        background: white;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: var(--font-body);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .recommend-btn:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(45, 90, 39, 0.3);
+      }
+
+      .recommend-btn.active {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Filter & Control Buttons */
+      .control-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .filter-btn {
+        padding: 0.7rem 1.3rem;
+        border-radius: 50px;
+        border: 2px solid transparent;
+        background: white;
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: var(--font-body);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .filter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      }
+
+      .filter-btn.active {
+        border-color: var(--primary);
+        background: var(--primary);
+        color: white;
+      }
+
+      .filter-btn[data-grade="green"] {
+        border-color: var(--grade-green);
+      }
+
+      .filter-btn[data-grade="green"].active {
+        background: var(--grade-green);
+        color: white;
+      }
+
+      .filter-btn[data-grade="orange"] {
+        border-color: var(--grade-orange);
+      }
+
+      .filter-btn[data-grade="orange"].active {
+        background: var(--grade-orange);
+        color: white;
+      }
+
+      .filter-btn[data-grade="red"] {
+        border-color: var(--grade-red);
+      }
+
+      .filter-btn[data-grade="red"].active {
+        background: var(--grade-red);
+        color: white;
+      }
+
+      .filter-btn[data-grade="favorite"] {
+        border-color: #ffd700;
+      }
+
+      .filter-btn[data-grade="favorite"].active {
+        background: #ffd700;
+        color: #2d3436;
+      }
+
+      .reset-btn {
+        padding: 0.8rem 1.8rem;
+        border-radius: 50px;
+        border: 2px solid var(--text-muted);
+        background: white;
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: var(--font-body);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .reset-btn:hover {
+        background: var(--text-muted);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .sort-select {
+        padding: 0.7rem 1.3rem;
+        border-radius: 50px;
+        border: 2px solid var(--primary-light);
+        background: white;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: var(--font-body);
+        outline: none;
+      }
+
+      .sort-select:hover {
+        border-color: var(--primary);
+        box-shadow: 0 2px 8px rgba(45, 90, 39, 0.15);
+      }
+
+      .result-count {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+
+      .result-count strong {
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      /* 평가 박스 */
+      .evaluation-box {
+        background: white;
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        border-left: 4px solid var(--primary);
+      }
+
+      .evaluation-box.good {
+        border-left-color: var(--grade-green);
+        background: linear-gradient(
+          135deg,
+          rgba(46, 204, 113, 0.05) 0%,
+          rgba(39, 174, 96, 0.05) 100%
+        );
+      }
+
+      .evaluation-box.warning {
+        border-left-color: var(--grade-orange);
+        background: linear-gradient(
+          135deg,
+          rgba(243, 156, 18, 0.05) 0%,
+          rgba(230, 126, 34, 0.05) 100%
+        );
+      }
+
+      .evaluation-box.bad {
+        border-left-color: var(--grade-red);
+        background: linear-gradient(
+          135deg,
+          rgba(231, 76, 60, 0.05) 0%,
+          rgba(192, 57, 43, 0.05) 100%
+        );
+      }
+
+      .evaluation-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .evaluation-header h4 {
+        font-family: var(--font-heading);
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin: 0;
+      }
+
+      .evaluation-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .evaluation-stat {
+        text-align: center;
+        padding: 0.8rem;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 12px;
+      }
+
+      .evaluation-stat strong {
+        display: block;
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .evaluation-stat span {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .evaluation-issues {
+        margin-top: 1rem;
+      }
+
+      .evaluation-issues h5 {
+        font-family: var(--font-heading);
+        color: var(--primary);
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .evaluation-issues ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .evaluation-issues li {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        color: #444;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .evaluation-issues li:before {
+        content: "⚠️";
+        position: absolute;
+        left: 0;
+      }
+
+      .evaluation-recommendations {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .evaluation-recommendations h5 {
+        font-family: var(--font-heading);
+        color: var(--primary);
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .evaluation-recommendations ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .evaluation-recommendations li {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        color: #444;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .evaluation-recommendations li:before {
+        content: "💡";
+        position: absolute;
+        left: 0;
+      }
+
+      /* Favorite Button */
+      .favorite-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 5;
+      }
+
+      .favorite-btn:hover {
+        transform: scale(1.1);
+        background: white;
+      }
+
+      .favorite-btn.active {
+        color: #ff6b6b;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .modal.show {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: var(--radius);
+        padding: 2.5rem;
+        max-width: 600px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.3s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--text-muted);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background: var(--primary);
+        transform: rotate(90deg);
+      }
+
+      .modal-title {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .modal-info {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .modal-info-item {
+        padding: 1rem;
+        background: #f9fbf8;
+        border-radius: 12px;
+      }
+
+      .modal-info-item strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .plant-card {
+        cursor: pointer;
+      }
+
+      /* Combination Panel */
+      .combination-panel {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: white;
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        z-index: 100;
+        display: none;
+        animation: slideUp 0.3s ease;
+      }
+
+      .combination-panel.show {
+        display: block;
+      }
+
+      .combination-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .combination-header h3 {
+        font-family: var(--font-heading);
+        color: var(--primary);
+        font-size: 1.3rem;
+      }
+
+      .close-combination {
+        background: var(--text-muted);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .close-combination:hover {
+        background: var(--primary);
+        transform: rotate(90deg);
+      }
+
+      .combination-plants {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        max-height: 150px;
+        overflow-y: auto;
+      }
+
+      .combination-plant {
+        background: var(--primary-light);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .combination-plant .remove {
+        cursor: pointer;
+        font-weight: bold;
+        opacity: 0.8;
+      }
+
+      .combination-plant .remove:hover {
+        opacity: 1;
+      }
+
+      .combination-score {
+        background: linear-gradient(135deg, #f9d423 0%, #f39c12 100%);
+        padding: 1rem;
+        border-radius: 16px;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .score-number {
+        font-family: var(--font-heading);
+        font-size: 3rem;
+        font-weight: 800;
+        color: white;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .score-label {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .score-breakdown {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+      }
+
+      .score-item {
+        background: #f9fbf8;
+        padding: 0.6rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .score-item strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+
+      .advice-section {
+        background: #fff9e6;
+        border-left: 4px solid var(--accent);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+
+      .advice-section h4 {
+        color: var(--primary);
+        font-family: var(--font-heading);
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .advice-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .advice-section li {
+        padding: 0.3rem 0;
+        font-size: 0.85rem;
+        color: #444;
+      }
+
+      .advice-section li:before {
+        content: "💡 ";
+        margin-right: 0.3rem;
+      }
+
+      .add-to-combination-btn {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(45, 90, 39, 0.3);
+        z-index: 5;
+      }
+
+      .add-to-combination-btn:hover {
+        transform: scale(1.1);
+        background: var(--primary-light);
+      }
+
+      .add-to-combination-btn.added {
+        background: var(--grade-green);
+      }
+
+      .combination-toggle {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 1.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(45, 90, 39, 0.4);
+        z-index: 99;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .combination-toggle:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(45, 90, 39, 0.5);
+      }
+
+      .combination-toggle .badge {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 600px) {
+        .combination-panel {
+          bottom: 1rem;
+          right: 1rem;
+          left: 1rem;
+          max-width: none;
+        }
+
+        .combination-toggle {
+          bottom: 1rem;
+          right: 1rem;
+        }
+      }
+
+      .recommend-result {
+        background: linear-gradient(
+          135deg,
+          rgba(45, 90, 39, 0.05) 0%,
+          rgba(76, 138, 66, 0.05) 100%
+        );
+        border: 2px dashed var(--primary-light);
+        border-radius: var(--radius);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        display: none;
+      }
+
+      .recommend-result.show {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .recommend-result h3 {
+        font-family: var(--font-heading);
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .recommend-result .result-plants {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+      }
+
+      .result-plant {
+        background: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        color: var(--primary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+      }
+
+      .result-plant:hover {
+        transform: scale(1.05);
+      }
+
+      /* Plant Grid */
+      .plant-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 5rem;
+      }
+
+      .plant-card {
+        background: white;
+        border-radius: var(--radius);
+        padding: 1.8rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .plant-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--primary-light);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .plant-title {
+        font-family: var(--font-heading);
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .grade-tag {
+        font-size: 1.8rem;
+      }
+
+      .meta-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .tag {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        font-weight: 600;
+      }
+
+      .tag-ca {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .tag-part {
+        background: #f5f5f5;
+        color: #616161;
+      }
+
+      .analysis-box {
+        background: #f9fbf8;
+        padding: 1rem;
+        border-radius: 16px;
+        font-size: 0.95rem;
+        color: #444;
+        flex-grow: 1;
+      }
+
+      /* Warnings */
+      .warnings-section {
+        background: var(--bg-dark);
+        color: white;
+        border-radius: 40px;
+        padding: 4rem 3rem;
+        margin-bottom: 5rem;
+      }
+
+      .warning-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .warning-item h3 {
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        font-family: var(--font-heading);
+      }
+
+      .warning-item p {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* Recommendation */
+      .recommend-banner {
+        background: linear-gradient(
+            rgba(45, 90, 39, 0.9),
+            rgba(45, 90, 39, 0.9)
+          ),
+          url("parado_manager_hero.png");
+        background-size: cover;
+        background-position: center;
+        border-radius: 40px;
+        padding: 4rem;
+        text-align: center;
+        color: white;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .recommend-banner h2 {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .mix-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .mix-line {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .mix-line span:first-child {
+        font-weight: 700;
+        color: var(--accent);
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+      }
+
+      .chips span {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 0.5rem 1.2rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      footer {
+        text-align: center;
+        padding: 4rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .plant-card {
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 1.5rem;
+        }
+
+        .hero-section {
+          height: 40vh;
+          min-height: 350px;
+        }
+
+        .recommend-banner {
+          padding: 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="hero-section">
+      <div class="hero-content">
+        <span class="badge">Tortoise Nutrition Specialist</span>
+        <h1>PARADO <span class="highlight">MANAGER</span></h1>
+        <p class="subtitle">동헤르만 육지거북 식이 분석 및 추천 가이드</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="grade-legend">
+        <div class="legend-card">
+          <span class="legend-icon">💚</span>
+          <div class="legend-text">
+            <h4>자유 급여</h4>
+            <p>매일 주식으로 권장</p>
+          </div>
+        </div>
+        <div class="legend-card">
+          <span class="legend-icon">🧡</span>
+          <div class="legend-text">
+            <h4>적당히 급여</h4>
+            <p>주 1~2회 혼합 급여</p>
+          </div>
+        </div>
+        <div class="legend-card">
+          <span class="legend-icon">❤️</span>
+          <div class="legend-text">
+            <h4>주의 요망</h4>
+            <p>소량만 가끔 급여</p>
+          </div>
+        </div>
+        <div class="legend-card">
+          <span class="legend-icon">❌</span>
+          <div class="legend-text">
+            <h4>급여 금지</h4>
+            <p>독성 또는 영양 불균형</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-area">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="식물 이름을 입력하세요 (예: 민들레, 뽕잎...)"
+          autocomplete="off"
+        />
+        <div class="control-bar">
+          <button class="reset-btn" id="resetBtn">🔄 초기화</button>
+          <select class="sort-select" id="sortSelect">
+            <option value="name">이름순 정렬</option>
+            <option value="grade">등급순 정렬</option>
+            <option value="ratio">Ca:P 비율순</option>
+          </select>
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn" data-grade="all">전체</button>
+          <button class="filter-btn" data-grade="green">💚 자유 급여</button>
+          <button class="filter-btn" data-grade="orange">🧡 적당히 급여</button>
+          <button class="filter-btn" data-grade="red">❤️ 주의 요망</button>
+          <button class="filter-btn" data-grade="favorite">⭐ 즐겨찾기</button>
+        </div>
+        <div class="recommend-buttons">
+          <button class="recommend-btn" data-type="safe">
+            💚 안전한 주식 추천
+          </button>
+          <button class="recommend-btn" data-type="calcium">
+            🦴 칼슘 높은 식물
+          </button>
+          <button class="recommend-btn" data-type="random">
+            🎲 랜덤 조합 추천
+          </button>
+          <button class="recommend-btn" data-type="daily">
+            📅 오늘의 식단
+          </button>
+        </div>
+        <div id="recommendResult" class="recommend-result">
+          <h3 id="resultTitle"></h3>
+          <div class="result-plants" id="resultPlants"></div>
+        </div>
+        <div class="result-count" id="resultCount"></div>
+        <div
+          id="evaluationBox"
+          class="evaluation-box"
+          style="display: none"
+        ></div>
+      </div>
+
+      <div id="plantGrid" class="plant-grid">
+        <!-- JavaScript will populate this -->
+      </div>
+
+      <!-- Modal -->
+      <div id="plantModal" class="modal">
+        <div class="modal-content">
+          <button class="modal-close" id="modalClose">×</button>
+          <div id="modalContent"></div>
+        </div>
+      </div>
+
+      <section class="warnings-section">
+        <h2
+          style="
+            font-family: var(--font-heading);
+            text-align: center;
+            font-size: 2rem;
+          "
+        >
+          ⚠️ 핵심 주의사항
+        </h2>
+        <div class="warning-grid">
+          <div class="warning-item">
+            <h3>단백질 과잉</h3>
+            <p>
+              뽕잎, 알팔파 등 고단백 식단은 성체 거북이의 등갑 피라미딩과
+              신부전을 유발할 수 있습니다. 야생 잡초 위주로 급여하세요.
+            </p>
+          </div>
+          <div class="warning-item">
+            <h3>옥살산 결석</h3>
+            <p>
+              케일, 시금치 등에 포함된 옥살산은 칼슘 흡수를 방해하고 체내 결석을
+              만듭니다. Ca:P 비율만큼이나 옥살성 함량이 중요합니다.
+            </p>
+          </div>
+          <div class="warning-item">
+            <h3>고이트로젠</h3>
+            <p>
+              청경채, 브로콜리 등 십자화과 채소는 갑상선 기능을 저하시킵니다.
+              매일 주식이 아닌 별미로만 소량 급여하십시오.
+            </p>
+          </div>
+          <div class="warning-item">
+            <h3>수분 공급</h3>
+            <p>
+              민들레, 방가지똥은 이뇨 작용이 강합니다. 과도한 섭취 시 탈수
+              위험이 있으니 항상 신선한 물을 제공하세요.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="recommend-banner">
+        <h2>💡 파라도 매니저 추천 조합</h2>
+        <div class="mix-container">
+          <div class="mix-line">
+            <span>BEST MAIN</span>
+            <div class="chips">
+              <span>치커리</span> <span>질경이</span> <span>민들레</span>
+              <span>왕고들빼기</span>
+            </div>
+          </div>
+          <div class="mix-line">
+            <span>CALCIUM BOOST</span>
+            <div class="chips">
+              <span>뽕잎 (어린 개체)</span> <span>천년초</span>
+              <span>가시엉겅퀴</span>
+            </div>
+          </div>
+          <div class="mix-line">
+            <span>SPECIAL TREAT</span>
+            <div class="chips">
+              <span>히비스커스 꽃</span> <span>제비꽃</span> <span>금잔화</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 파라도 매니저 - 동헤르만 육지거북 데이터 센터</p>
+      <p style="opacity: 0.5; margin-top: 0.5rem">
+        The Tortoise Table & 국가표준식품성분표 기반
+      </p>
+    </footer>
+
+    <script>
+      const plantData = [
+        {
+          name: "가는잎왕고들빼기",
+          grade: "green",
+          icon: "💚",
+          calcium: 3.0,
+          phosphorus: 1.0,
+          analysis:
+            "섬유질이 풍부하고 칼슘 비율이 좋아 매우 훌륭한 잡초입니다.",
+          parts: "🌿",
+        },
+        {
+          name: "가시엉겅퀴",
+          grade: "green",
+          icon: "💚",
+          calcium: 3.5,
+          phosphorus: 1.0,
+          analysis: "간 기능 회복에 도움을 주며 영양 균형이 우수합니다.",
+          parts: "🌿🌼",
+        },
+        {
+          name: "개나리 잎/꽃",
+          grade: "green",
+          icon: "💚",
+          calcium: 2.0,
+          phosphorus: 1.0,
+          analysis: "봄철 별미로 좋습니다. 독성이 없어 안전합니다.",
+          parts: "🌿🌼",
+        },
+        {
+          name: "개발선인장",
+          grade: "green",
+          icon: "💚",
+          calcium: 5.0,
+          phosphorus: 1.0,
+          analysis: "수분 보충과 칼슘 보충에 탁월합니다.",
+          parts: "🌿",
+        },
+        {
+          name: "개보리뺑이",
+          grade: "green",
+          icon: "💚",
+          calcium: 2.0,
+          phosphorus: 1.0,
+          analysis: "고들빼기류와 비슷하게 안전하고 훌륭한 주식입니다.",
+          parts: "🌿",
+        },
+        {
+          name: "공심채",
+          grade: "orange",
+          icon: "🧡",
+          calcium: 1.5,
+          phosphorus: 1.0,
+          analysis: "칼슘은 많으나 옥살산이 다소 있어 매일 급여는 피하세요.",
+          parts: "🌿",
+        },
+        {
+          name: "금계국 / 큰금계국",
+          grade: "green",
+          icon: "💚",
+          calcium: 2.0,
+          phosphorus: 1.0,
+          analysis: "꽃과 잎 모두 안전하며 기호성이 좋습니다.",
+          parts: "🌿🌼",
+        },
+        {
+          name: "냉이",
+          grade: "orange",
+          icon: "🧡",
+          calcium: 2.5,
+          phosphorus: 1.0,
+          analysis: "영양은 좋으나 고이트로젠 성분이 있어 소량씩 급여하십시오.",
+          parts: "🌿",
+        },
+        {
+          name: "민들레",
+          grade: "green",
+          icon: "💚",
+          calcium: 2.8,
+          phosphorus: 1.0,
+          analysis:
+            "최고의 주식. 칼슘이 매우 높으나 이뇨 작용이 있어 수분 공급 병행 필수.",
+          parts: "🌿🌼",
+        },
+        {
+          name: "뽕잎 (구지뽕 포함)",
+          grade: "green",
+          icon: "💚",
+          calcium: 10.0,
+          phosphorus: 1.0,
+          analysis:
+            "칼슘 끝판왕. 단백질이 다소 높으니 자라는 개체에게 특히 좋습니다.",
+          parts: "🌿",
+        },
+        {
+          name: "돌나물",
+          grade: "orange",
+          icon: "🧡",
+          calcium: 1.8,
+          phosphorus: 1.0,
+          analysis: "수분 보충에 좋으나 칼슘 비율이 주식으로는 살짝 낮습니다.",
+          parts: "🌿",
+        },
+        {
+          name: "로메인",
+          grade: "orange",
+          icon: "🧡",
+          calcium: 0.8,
+          phosphorus: 1.0,
+          analysis:
+            "인 비중이 높습니다. 반드시 칼슘제를 추가하거나 주식에 섞어주세요.",
+          parts: "🌿",
+        },
+        {
+          name: "루꼴라",
+          grade: "orange",
+          icon: "🧡",
+          calcium: 2.0,
+          phosphorus: 1.0,
+          analysis: "칼슘은 높지만 향이 강해 기호성이 갈릴 수 있습니다.",
+          parts: "🌿",
+        },
+        {
+          name: "질경이 (왕/창/털)",
+          grade: "green",
+          icon: "💚",
+          calcium: 3.0,
+          phosphorus: 1.0,
+          analysis: "섬유질과 칼슘의 완벽한 조화. 주식으로 강력 추천합니다.",
+          parts: "🌿",
+        },
+        {
+          name: "치커리 / 적치커리",
+          grade: "green",
+          icon: "💚",
+          calcium: 2.0,
+          phosphorus: 1.0,
+          analysis: "마트에서 구하기 쉬운 가장 안전한 채소 중 하나입니다.",
+          parts: "🌿",
+        },
+        {
+          name: "청경채",
+          grade: "red",
+          icon: "❤️",
+          calcium: 1.0,
+          phosphorus: 1.0,
+          analysis:
+            "고이트로젠이 많아 갑상선 비대를 유발할 수 있습니다. 가끔만 주세요.",
+          parts: "🌿",
+        },
+        {
+          name: "케일",
+          grade: "red",
+          icon: "❤️",
+          calcium: 2.0,
+          phosphorus: 1.0,
+          analysis:
+            "칼슘은 많으나 옥살산과 고이트로젠이 모두 높아 주식으로는 부적합합니다.",
+          parts: "🌿",
+        },
+        {
+          name: "천년초 / 백년초",
+          grade: "green",
+          icon: "💚",
+          calcium: 5.0,
+          phosphorus: 1.0,
+          analysis: "가시 제거 후 급여 시 최고의 칼슘 및 수분 공급원입니다.",
+          parts: "🌿",
+        },
+        {
+          name: "무청",
+          grade: "orange",
+          icon: "🧡",
+          calcium: 3.0,
+          phosphorus: 1.0,
+          analysis: "칼슘은 매우 높지만 옥살산이 있어 다른 채소와 섞어주세요.",
+          parts: "🌿",
+        },
+        {
+          name: "로즈마리 / 바질 / 민트",
+          grade: "red",
+          icon: "❤️",
+          calcium: 0.0,
+          phosphorus: 1.0,
+          analysis:
+            "향신채는 독성은 없으나 향이 너무 강해 거북이가 거부하거나 부담을 줄 수 있습니다.",
+          parts: "🌿",
+        },
+        {
+          name: "쥬키니 (애호박)",
+          grade: "orange",
+          icon: "🧡",
+          calcium: 0.5,
+          phosphorus: 1.0,
+          analysis: "인이 높고 칼슘이 낮아 열매보다는 잎 위주로 급여하십시오.",
+          parts: "🌿",
+        },
+      ];
+
+      const grid = document.getElementById("plantGrid");
+      const input = document.getElementById("searchInput");
+      const recommendResult = document.getElementById("recommendResult");
+      const resultTitle = document.getElementById("resultTitle");
+      const resultPlants = document.getElementById("resultPlants");
+      const recommendButtons = document.querySelectorAll(".recommend-btn");
+      const resetBtn = document.getElementById("resetBtn");
+      const sortSelect = document.getElementById("sortSelect");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const resultCount = document.getElementById("resultCount");
+      const evaluationBox = document.getElementById("evaluationBox");
+      const modal = document.getElementById("plantModal");
+      const modalContent = document.getElementById("modalContent");
+      const modalClose = document.getElementById("modalClose");
+
+      // 상태 관리
+      let currentFilter = "";
+      let currentGradeFilter = "all";
+      let currentSort = "name";
+      let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+      // ratio 계산 헬퍼 함수
+      function getRatio(plant) {
+        if (plant.calcium === 0) return "-";
+        const ratio = plant.calcium / plant.phosphorus;
+        if (ratio >= 10) return `${ratio.toFixed(1)}:1 이상`;
+        return `${ratio.toFixed(1)}:1`;
+      }
+
+      function getRatioValue(plant) {
+        if (plant.calcium === 0) return 0;
+        return plant.calcium / plant.phosphorus;
+      }
+
+      // 검색된 식물들의 총합 비율 평가
+      function evaluateCombination(plants) {
+        if (plants.length === 0) return null;
+
+        let totalCalcium = 0;
+        let totalPhosphorus = 0;
+        let greenCount = 0;
+        let orangeCount = 0;
+        let redCount = 0;
+
+        plants.forEach((p) => {
+          totalCalcium += p.calcium;
+          totalPhosphorus += p.phosphorus;
+          if (p.grade === "green") greenCount++;
+          else if (p.grade === "orange") orangeCount++;
+          else if (p.grade === "red") redCount++;
+        });
+
+        const avgRatio =
+          totalPhosphorus > 0 ? totalCalcium / totalPhosphorus : 0;
+        const totalRatio =
+          totalPhosphorus > 0 ? totalCalcium / totalPhosphorus : 0;
+
+        // 평가
+        let status = "good";
+        let statusText = "좋음";
+        let statusIcon = "✅";
+        let issues = [];
+        let recommendations = [];
+
+        // Ca:P 비율 평가 (제공된 기준에 따라)
+        if (avgRatio <= 0.5) {
+          // 0.5:1 이하: 🚨 매우 위험
+          status = "bad";
+          statusText = "매우 위험";
+          statusIcon = "🚨";
+          issues.push(
+            `Ca:P 비율이 매우 위험합니다 (${avgRatio.toFixed(
+              2
+            )}:1). 심각한 골질환, 회복 어려움.`
+          );
+          recommendations.push(
+            "즉시 칼슘이 높은 식물(뽕잎, 천년초, 민들레, 질경이 등)을 추가하고 칼슘제를 보충하세요."
+          );
+        } else if (avgRatio <= 1.0) {
+          // 1:1 이하: 🚫 위험
+          status = "bad";
+          statusText = "위험";
+          statusIcon = "🚫";
+          issues.push(
+            `Ca:P 비율이 위험합니다 (${avgRatio.toFixed(
+              2
+            )}:1). 등딱지 연화, 변형, 성장 장애 위험.`
+          );
+          recommendations.push(
+            "칼슘이 높은 식물(뽕잎, 천년초, 민들레, 질경이 등)을 즉시 추가하세요."
+          );
+        } else if (avgRatio < 1.5) {
+          // 1:1 초과 ~ 1.5 미만: ❌ 부적합
+          status = "bad";
+          statusText = "부적합";
+          statusIcon = "❌";
+          issues.push(
+            `Ca:P 비율이 부적합합니다 (${avgRatio.toFixed(
+              2
+            )}:1). 장기 급여 시 MBD(대사성 골질환) 위험.`
+          );
+          recommendations.push(
+            "칼슘이 높은 식물을 추가하여 비율을 2:1 이상으로 올리세요."
+          );
+        } else if (avgRatio < 2.0) {
+          // 1.5:1 ~ 2.0 미만: ⚠️ 주의
+          status = "warning";
+          statusText = "주의";
+          statusIcon = "⚠️";
+          issues.push(
+            `Ca:P 비율에 주의가 필요합니다 (${avgRatio.toFixed(
+              2
+            )}:1). 인 비율 증가로 칼슘 흡수 저해가 시작됩니다.`
+          );
+          recommendations.push(
+            "칼슘이 높은 식물을 추가하여 비율을 2:1 이상으로 올리는 것을 권장합니다."
+          );
+        } else if (avgRatio < 2.5) {
+          // 2:1 ~ 2.5 미만: ✅ 적정
+          status = "good";
+          statusText = "적정";
+          statusIcon = "✅";
+          // 적정 범위이므로 문제 없음
+        } else if (avgRatio < 3.0) {
+          // 2.5:1 ~ 3.0 미만: ⭐ 최적
+          status = "good";
+          statusText = "최적";
+          statusIcon = "⭐";
+          // 최적 범위이므로 문제 없음
+        } else {
+          // 3:1 이상: ⚠️ 주의
+          status = "warning";
+          statusText = "주의";
+          statusIcon = "⚠️";
+          issues.push(
+            `Ca:P 비율이 높습니다 (${avgRatio.toFixed(
+              2
+            )}:1). 단기적으로는 문제가 적으나 장기적으로 미네랄 불균형과 신장 부담 가능.`
+          );
+          recommendations.push(
+            "다양한 식물을 섞어 균형을 맞추고, 장기적으로는 2.5:1 정도로 조정하는 것을 권장합니다."
+          );
+        }
+
+        // 등급 분포 평가
+        const redRatio = redCount / plants.length;
+        if (redRatio > 0.2) {
+          status = "bad";
+          statusText = "주의 필요";
+          statusIcon = "⚠️";
+          issues.push(
+            `주의 요망 식물이 ${redCount}개(${Math.round(
+              redRatio * 100
+            )}%) 포함되어 있습니다.`
+          );
+          recommendations.push("주의 요망 식물은 소량만 급여하세요.");
+        } else if (redRatio > 0) {
+          issues.push(
+            `주의 요망 식물이 ${redCount}개 포함되어 있습니다. 소량만 급여하세요.`
+          );
+        }
+
+        const orangeRatio = orangeCount / plants.length;
+        if (orangeRatio > 0.5 && greenCount < orangeCount) {
+          if (status !== "bad") {
+            status = "warning";
+            statusText = "개선 권장";
+            statusIcon = "⚠️";
+          }
+          issues.push(`적당히 급여 식물이 많습니다 (${orangeCount}개).`);
+          recommendations.push("자유 급여 식물을 더 추가하는 것을 권장합니다.");
+        }
+
+        // 다양성 평가
+        if (plants.length < 3) {
+          if (status !== "bad" && status !== "warning") {
+            status = "warning";
+            statusText = "개선 권장";
+            statusIcon = "⚠️";
+          }
+          recommendations.push(
+            "식물 종류를 더 다양하게 추가하면 영양 균형이 좋아집니다."
+          );
+        }
+
+        return {
+          totalCalcium,
+          totalPhosphorus,
+          avgRatio: avgRatio.toFixed(2),
+          totalRatio: totalRatio.toFixed(2),
+          greenCount,
+          orangeCount,
+          redCount,
+          totalCount: plants.length,
+          status,
+          statusText,
+          statusIcon,
+          issues,
+          recommendations,
+        };
+      }
+
+      // 즐겨찾기 저장/로드
+      function saveFavorites() {
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+      }
+
+      function toggleFavorite(plantName) {
+        const index = favorites.indexOf(plantName);
+        if (index > -1) {
+          favorites.splice(index, 1);
+        } else {
+          favorites.push(plantName);
+        }
+        saveFavorites();
+        render();
+      }
+
+      function isFavorite(plantName) {
+        return favorites.includes(plantName);
+      }
+
+      // 정렬 함수
+      function sortPlants(plants) {
+        const sorted = [...plants];
+        switch (currentSort) {
+          case "name":
+            sorted.sort((a, b) => a.name.localeCompare(b.name, "ko"));
+            break;
+          case "grade":
+            const gradeOrder = { green: 1, orange: 2, red: 3 };
+            sorted.sort((a, b) => gradeOrder[a.grade] - gradeOrder[b.grade]);
+            break;
+          case "ratio":
+            sorted.sort((a, b) => {
+              return getRatioValue(b) - getRatioValue(a);
+            });
+            break;
+        }
+        return sorted;
+      }
+
+      function render(filter = currentFilter) {
+        currentFilter = filter;
+        grid.innerHTML = "";
+        let filtered;
+
+        if (filter.includes("|")) {
+          // 추천 기능에서 여러 식물 이름으로 필터링
+          const names = filter.split("|");
+          filtered = plantData.filter((p) =>
+            names.some((name) => p.name.includes(name.trim()))
+          );
+        } else {
+          filtered = plantData.filter(
+            (p) => p.name.includes(filter) || p.analysis.includes(filter)
+          );
+        }
+
+        // 등급 필터 적용
+        if (currentGradeFilter === "favorite") {
+          filtered = filtered.filter((p) => isFavorite(p.name));
+        } else if (currentGradeFilter !== "all") {
+          filtered = filtered.filter((p) => p.grade === currentGradeFilter);
+        }
+
+        // 정렬 적용
+        filtered = sortPlants(filtered);
+
+        // 결과 개수 표시
+        resultCount.innerHTML = `<strong>${filtered.length}</strong>개의 식물이 검색되었습니다.`;
+
+        // 평가 결과 계산 및 표시 (초기화 상태가 아닐 때만 표시)
+        const isInitialState =
+          (!currentFilter || currentFilter.trim() === "") &&
+          currentGradeFilter === "all";
+
+        if (filtered.length > 0 && !isInitialState) {
+          const evaluation = evaluateCombination(filtered);
+          if (evaluation) {
+            evaluationBox.className = `evaluation-box ${evaluation.status}`;
+            evaluationBox.style.display = "block";
+
+            let issuesHTML = "";
+            if (evaluation.issues.length > 0) {
+              issuesHTML = `
+                <div class="evaluation-issues">
+                  <h5>⚠️ 주의사항</h5>
+                  <ul>
+                    ${evaluation.issues
+                      .map((issue) => `<li>${issue}</li>`)
+                      .join("")}
+                  </ul>
+                </div>
+              `;
+            }
+
+            let recommendationsHTML = "";
+            if (evaluation.recommendations.length > 0) {
+              recommendationsHTML = `
+                <div class="evaluation-recommendations">
+                  <h5>💡 개선 권장사항</h5>
+                  <ul>
+                    ${evaluation.recommendations
+                      .map((rec) => `<li>${rec}</li>`)
+                      .join("")}
+                  </ul>
+                </div>
+              `;
+            }
+
+            evaluationBox.innerHTML = `
+              <div class="evaluation-header">
+                <span style="font-size: 1.5rem;">${evaluation.statusIcon}</span>
+                <h4>영양 균형 평가: ${evaluation.statusText}</h4>
+              </div>
+              <div class="evaluation-stats">
+                <div class="evaluation-stat">
+                  <strong>${evaluation.avgRatio}:1</strong>
+                  <span>평균 Ca:P 비율</span>
+                </div>
+                <div class="evaluation-stat">
+                  <strong>${evaluation.greenCount}</strong>
+                  <span>자유 급여</span>
+                </div>
+                <div class="evaluation-stat">
+                  <strong>${evaluation.orangeCount}</strong>
+                  <span>적당히 급여</span>
+                </div>
+                <div class="evaluation-stat">
+                  <strong>${evaluation.redCount}</strong>
+                  <span>주의 요망</span>
+                </div>
+              </div>
+              ${issuesHTML}
+              ${recommendationsHTML}
+            `;
+          }
+        } else {
+          evaluationBox.style.display = "none";
+        }
+
+        // 초기화 상태일 때는 항상 숨김
+        if (isInitialState) {
+          evaluationBox.style.display = "none";
+        }
+
+        filtered.forEach((p, idx) => {
+          const card = document.createElement("div");
+          card.className = "plant-card";
+          card.style.animationDelay = `${idx * 0.05}s`;
+          const isFav = isFavorite(p.name);
+          card.innerHTML = `
+                    <button class="favorite-btn ${
+                      isFav ? "active" : ""
+                    }" data-name="${p.name}">
+                        ${isFav ? "❤️" : "🤍"}
+                    </button>
+                    <div class="card-header">
+                        <h3 class="plant-title">${p.name}</h3>
+                        <span class="grade-tag">${p.icon}</span>
+                    </div>
+                    <div class="meta-tags">
+                        <span class="tag tag-ca">Ca:P ${getRatio(p)}</span>
+                        <span class="tag tag-part">${p.parts} 급여</span>
+                    </div>
+                    <div class="analysis-box">${p.analysis}</div>
+                `;
+
+          // 카드 클릭 시 모달 열기
+          card.addEventListener("click", () => showModal(p));
+
+          // 즐겨찾기 버튼
+          const favBtn = card.querySelector(".favorite-btn");
+          favBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleFavorite(p.name);
+          });
+
+          grid.appendChild(card);
+        });
+      }
+
+      // 모달 표시
+      function showModal(plant) {
+        const gradeText = {
+          green: "자유 급여 - 매일 주식으로 권장",
+          orange: "적당히 급여 - 주 1~2회 혼합 급여",
+          red: "주의 요망 - 소량만 가끔 급여",
+        };
+
+        modalContent.innerHTML = `
+          <h2 class="modal-title">
+            ${plant.icon} ${plant.name}
+          </h2>
+          <div class="modal-info">
+            <div class="modal-info-item">
+              <strong>등급</strong>
+              ${gradeText[plant.grade]}
+            </div>
+            <div class="modal-info-item">
+              <strong>Ca:P 비율</strong>
+              ${getRatio(plant)} (칼슘: ${plant.calcium}, 인: ${
+          plant.phosphorus
+        })
+            </div>
+            <div class="modal-info-item">
+              <strong>급여 부위</strong>
+              ${plant.parts}
+            </div>
+            <div class="modal-info-item">
+              <strong>상세 분석</strong>
+              ${plant.analysis}
+            </div>
+          </div>
+        `;
+        modal.classList.add("show");
+      }
+
+      // 모달 닫기
+      modalClose.addEventListener("click", () => {
+        modal.classList.remove("show");
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("show");
+        }
+      });
+
+      function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
+
+      function showRecommendation(type) {
+        let recommended = [];
+        let title = "";
+
+        switch (type) {
+          case "safe":
+            recommended = plantData
+              .filter((p) => p.grade === "green")
+              .slice(0, 6);
+            title = "💚 안전하게 매일 급여 가능한 주식 추천";
+            break;
+          case "calcium":
+            recommended = plantData
+              .filter((p) => p.grade === "green" && getRatioValue(p) >= 3)
+              .slice(0, 5);
+            title = "🦴 칼슘 함량이 높은 식물 추천";
+            break;
+          case "random":
+            const safePlants = plantData.filter((p) => p.grade === "green");
+            recommended = shuffleArray(safePlants).slice(0, 4);
+            title = "🎲 오늘을 위한 랜덤 조합 추천";
+            break;
+          case "daily":
+            const main = plantData.filter((p) =>
+              ["민들레", "질경이", "치커리", "가는잎왕고들빼기"].some((n) =>
+                p.name.includes(n)
+              )
+            );
+            const mix = plantData.filter(
+              (p) => p.grade === "green" && !main.some((m) => m.name === p.name)
+            );
+            recommended = [
+              ...main.slice(0, 3),
+              ...shuffleArray(mix).slice(0, 2),
+            ];
+            title = "📅 오늘의 균형잡힌 식단 추천";
+            break;
+        }
+
+        if (recommended.length > 0) {
+          resultTitle.textContent = title;
+          resultPlants.innerHTML = "";
+          recommended.forEach((plant) => {
+            const span = document.createElement("span");
+            span.className = "result-plant";
+            span.textContent = `${plant.icon} ${plant.name}`;
+            span.style.cursor = "pointer";
+            span.addEventListener("click", () => {
+              input.value = plant.name;
+              currentGradeFilter = "all";
+              filterButtons.forEach((b) => b.classList.remove("active"));
+              filterButtons[0].classList.add("active");
+              render(plant.name);
+              recommendResult.classList.remove("show");
+            });
+            resultPlants.appendChild(span);
+          });
+          recommendResult.classList.add("show");
+
+          // 추천된 식물들로 필터링
+          const names = recommended.map((p) => p.name);
+          input.value = names.join(" ");
+          currentGradeFilter = "all";
+          filterButtons.forEach((b) => b.classList.remove("active"));
+          filterButtons[0].classList.add("active");
+          render(names.join("|"));
+        }
+      }
+
+      // 초기화 버튼
+      resetBtn.addEventListener("click", () => {
+        input.value = "";
+        currentFilter = "";
+        currentGradeFilter = "all";
+        currentSort = "name";
+        sortSelect.value = "name";
+        recommendResult.classList.remove("show");
+        recommendButtons.forEach((b) => b.classList.remove("active"));
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        filterButtons[0].classList.add("active"); // "전체" 버튼 활성화
+        render();
+      });
+
+      // 필터 버튼
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentGradeFilter = btn.getAttribute("data-grade");
+          render();
+        });
+      });
+
+      // 정렬 선택
+      sortSelect.addEventListener("change", (e) => {
+        currentSort = e.target.value;
+        render();
+      });
+
+      // 추천 버튼
+      recommendButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          recommendButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const type = btn.getAttribute("data-type");
+          showRecommendation(type);
+        });
+      });
+
+      // 검색 입력
+      input.addEventListener("input", (e) => {
+        if (e.target.value.trim() === "") {
+          recommendResult.classList.remove("show");
+          recommendButtons.forEach((b) => b.classList.remove("active"));
+        }
+        render(e.target.value);
+      });
+
+      // 키보드 단축키 (ESC로 모달 닫기, /로 검색 포커스)
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          modal.classList.remove("show");
+        }
+        if (e.key === "/" && e.target.tagName !== "INPUT") {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+
+      // 초기 렌더링
+      filterButtons[0].classList.add("active"); // "전체" 버튼 활성화
+      render(); // Init
+    </script>
+  </body>
+</html>
