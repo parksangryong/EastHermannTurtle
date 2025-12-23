@@ -1945,9 +1945,9 @@
             title = "🦴 칼슘 함량이 높은 식물 추천";
             break;
           case "random":
-            const safePlants = plantData.filter((p) => p.grade === "green");
-            recommended = shuffleArray(safePlants).slice(0, 4);
-            title = "🎲 오늘을 위한 랜덤 조합 추천";
+            // 등급 상관없이 모든 식물 중 랜덤 선택
+            recommended = shuffleArray(plantData).slice(0, 4);
+            title = "🎲 진짜 랜덤 조합 추천";
             break;
           case "daily":
             // Ca:P 비율을 고려한 균형잡힌 식단 추천
