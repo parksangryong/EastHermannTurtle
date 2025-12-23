@@ -1950,19 +1950,90 @@
             title = "🎲 오늘을 위한 랜덤 조합 추천";
             break;
           case "daily":
-            const main = plantData.filter((p) =>
-              ["민들레", "질경이", "치커리", "가는잎왕고들빼기"].some((n) =>
-                p.name.includes(n)
-              )
+            // Ca:P 비율을 고려한 균형잡힌 식단 추천
+            const dailySafePlants = plantData.filter(
+              (p) => p.grade === "green"
             );
-            const mix = plantData.filter(
-              (p) => p.grade === "green" && !main.some((m) => m.name === p.name)
+
+            // 최적 비율(2:1 ~ 2.5:1)을 만드는 조합 찾기
+            function findBalancedCombination(
+              plants,
+              targetRatio = 2.2,
+              count = 5
+            ) {
+              const shuffled = shuffleArray(plants);
+              let bestCombination = [];
+              let bestRatioDiff = Infinity;
+
+              // 여러 조합 시도 (최대 100번)
+              for (let attempt = 0; attempt < 100; attempt++) {
+                const combination = [];
+                let totalCalcium = 0;
+                let totalPhosphorus = 0;
+
+                // 4-6개 식물 선택
+                const targetCount = 4 + Math.floor(Math.random() * 3);
+                const selected = shuffleArray(plants).slice(0, targetCount);
+
+                selected.forEach((plant) => {
+                  combination.push(plant);
+                  totalCalcium += plant.calcium;
+                  totalPhosphorus += plant.phosphorus;
+                });
+
+                if (totalPhosphorus > 0) {
+                  const ratio = totalCalcium / totalPhosphorus;
+                  const ratioDiff = Math.abs(ratio - targetRatio);
+
+                  // 목표 비율에 가까우면서 2:1 ~ 2.5:1 범위 내
+                  if (
+                    ratio >= 2.0 &&
+                    ratio <= 2.5 &&
+                    ratioDiff < bestRatioDiff
+                  ) {
+                    bestCombination = combination;
+                    bestRatioDiff = ratioDiff;
+                  }
+                }
+              }
+
+              // 최적 조합을 찾지 못한 경우, 가장 가까운 조합 반환
+              if (bestCombination.length === 0) {
+                // 기본 조합: 메인 식물 + 보조 식물
+                const main = plants.filter((p) =>
+                  ["민들레", "질경이", "치커리", "가는잎왕고들빼기"].some((n) =>
+                    p.name.includes(n)
+                  )
+                );
+                const others = plants.filter(
+                  (p) => !main.some((m) => m.name === p.name)
+                );
+                bestCombination = [
+                  ...main.slice(0, 2),
+                  ...shuffleArray(others).slice(0, 3),
+                ];
+              }
+
+              return bestCombination;
+            }
+
+            recommended = findBalancedCombination(dailySafePlants);
+
+            // 최종 비율 계산 및 표시
+            const finalCalcium = recommended.reduce(
+              (sum, p) => sum + p.calcium,
+              0
             );
-            recommended = [
-              ...main.slice(0, 3),
-              ...shuffleArray(mix).slice(0, 2),
-            ];
-            title = "📅 오늘의 균형잡힌 식단 추천";
+            const finalPhosphorus = recommended.reduce(
+              (sum, p) => sum + p.phosphorus,
+              0
+            );
+            const finalRatio =
+              finalPhosphorus > 0
+                ? (finalCalcium / finalPhosphorus).toFixed(2)
+                : "0";
+
+            title = `📅 오늘의 균형잡힌 식단 추천 (Ca:P ${finalRatio}:1)`;
             break;
         }
 
