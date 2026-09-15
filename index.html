@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" data-adsense-client="">
+<html lang="ko" data-adsense-client="" data-adsense-slot="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2d5a27" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
-    <link rel="icon" href="favicon.png" type="image/png" />
     <title>파라도 매니저 | 동헤르만 육지거북 식단 가이드</title>
     <meta
       name="description"
@@ -1301,17 +1300,31 @@
       <p style="opacity: 0.5; margin-top: 0.5rem">
         The Tortoise Table & 국가표준식품성분표 기반
       </p>
+      <p><a href="privacy.html" style="color: inherit">개인정보처리방침</a></p>
     </footer>
 
     <aside id="adsenseSlot" class="ad-slot" aria-label="광고" hidden></aside>
+    <script src="adsense-config.js"></script>
     <script>
-      const adsenseClient = document.documentElement.dataset.adsenseClient;
-      if (adsenseClient) {
+      const adsenseClient = window.__ADSENSE__?.client || document.documentElement.dataset.adsenseClient;
+      const adsenseSlot = window.__ADSENSE__?.slot || document.documentElement.dataset.adsenseSlot;
+      if (adsenseClient && adsenseSlot) {
         const adScript = document.createElement("script");
         adScript.async = true;
         adScript.crossOrigin = "anonymous";
         adScript.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`;
         document.head.appendChild(adScript);
+        const adSlot = document.getElementById("adsenseSlot");
+        const ad = document.createElement("ins");
+        ad.className = "adsbygoogle";
+        ad.style.display = "block";
+        ad.dataset.adClient = adsenseClient;
+        ad.dataset.adSlot = adsenseSlot;
+        ad.dataset.adFormat = "auto";
+        ad.dataset.fullWidthResponsive = "true";
+        adSlot.hidden = false;
+        adSlot.appendChild(ad);
+        adScript.addEventListener("load", () => (window.adsbygoogle = window.adsbygoogle || []).push({}));
       }
       const plantData = [
         {
