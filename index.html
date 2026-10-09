@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-adsense-client="" data-adsense-slot="">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,7 +63,6 @@
 
       button, input, select { font: inherit; }
       button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-      .ad-slot { min-height: 100px; max-width: 1100px; margin: 2rem auto; border-radius: 24px; overflow: hidden; background: #e9efe6; }
       .seo-guide{max-width:1100px;margin:4rem auto;padding:3rem 2rem}.seo-kicker{font-size:.75rem;font-weight:800;letter-spacing:.18em;color:var(--primary)}.seo-guide>h2{font:800 clamp(1.8rem,4vw,2.6rem)/1.2 var(--font-heading);margin:.7rem 0 2rem}.seo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.seo-grid article,.seo-faq{background:white;border-radius:18px;padding:1.5rem;box-shadow:var(--shadow)}.seo-grid h3,.seo-faq h3{margin-bottom:.8rem}.seo-grid ol,.seo-grid ul{padding-left:1.2rem;color:var(--text-muted)}.seo-faq{margin-top:1rem}.seo-faq details{padding:1rem 0;border-top:1px solid #e6ebe4}.seo-faq summary{cursor:pointer;font-weight:700}.seo-faq details p{margin-top:.7rem;color:var(--text-muted)}@media(max-width:720px){.seo-guide{padding:2rem 1rem}.seo-grid{grid-template-columns:1fr}}
 
       .container {
@@ -1309,29 +1308,7 @@
       <p><a href="privacy.html" style="color: inherit">개인정보처리방침</a></p>
     </footer>
 
-    <aside id="adsenseSlot" class="ad-slot" aria-label="광고" hidden></aside>
-    <script src="adsense-config.js"></script>
     <script>
-      const adsenseClient = window.__ADSENSE__?.client || document.documentElement.dataset.adsenseClient;
-      const adsenseSlot = window.__ADSENSE__?.slot || document.documentElement.dataset.adsenseSlot;
-      if (adsenseClient && adsenseSlot) {
-        const adScript = document.createElement("script");
-        adScript.async = true;
-        adScript.crossOrigin = "anonymous";
-        adScript.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`;
-        document.head.appendChild(adScript);
-        const adSlot = document.getElementById("adsenseSlot");
-        const ad = document.createElement("ins");
-        ad.className = "adsbygoogle";
-        ad.style.display = "block";
-        ad.dataset.adClient = adsenseClient;
-        ad.dataset.adSlot = adsenseSlot;
-        ad.dataset.adFormat = "auto";
-        ad.dataset.fullWidthResponsive = "true";
-        adSlot.hidden = false;
-        adSlot.appendChild(ad);
-        adScript.addEventListener("load", () => (window.adsbygoogle = window.adsbygoogle || []).push({}));
-      }
       const plantData = [
         {
           name: "가는잎왕고들빼기",
